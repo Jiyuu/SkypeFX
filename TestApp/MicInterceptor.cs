@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using SKYPE4COMLib;
 using JSNet;
 using NAudio.Wave;
+using System.IO;
 
 namespace SkypeFx
 {
@@ -19,6 +20,8 @@ namespace SkypeFx
         TcpServer micServer;
         TcpServer outServer;
         NetworkStream outStream;
+        public MemoryStream internalStream = new MemoryStream();
+        public object internalStreamLock = new object();
         NetworkStream micStream;
         Call call;
         //int packetSize;
@@ -121,6 +124,11 @@ namespace SkypeFx
                 OutputStream.Read(args.Buffer, 0, args.Buffer.Length);
                 // play it back
                 outStream.Write(args.Buffer, 0, args.Buffer.Length);
+                lock (internalStreamLock)
+                {
+                    internalStream.Write(args.Buffer, 0, args.Buffer.Length);
+                }
+
             }
         }
 

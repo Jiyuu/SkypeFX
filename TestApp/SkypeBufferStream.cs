@@ -47,6 +47,8 @@ namespace SkypeFx
         {
             if (offset != 0)
                 throw new ArgumentOutOfRangeException("offset");
+            if (count > latestInBuffer.Length)
+                count = latestInBuffer.Length;
             if (buffer != latestInBuffer)
                 Array.Copy(latestInBuffer, buffer, count);
             return count;

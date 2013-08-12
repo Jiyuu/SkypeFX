@@ -7,10 +7,35 @@ using NAudio.Wave;
 
 namespace SkypeFx
 {
+    class waveBuffer : IWaveProvider
+    {
+        System.IO.Stream internalStream;
+        object streamLock;
+        public waveBuffer(System.IO.Stream source,object slock)
+        {
+            internalStream = source;
+            streamLock = slock;
+        }
+
+        public int Read(byte[] buffer, int offset, int count)
+        {
+            lock (streamLock)
+            {
+                return internalStream.Read(buffer, offset, count);
+            }
+        }
+        static WaveFormat format = new WaveFormat(44100, 16, 1);
+        public WaveFormat WaveFormat
+        {
+            get { return format; }
+        }
+    }
     class MainFormAudioGraph : IDisposable
     {
         WaveStream outStream;
         IWavePlayer player;
+        waveBuffer tmp;
+
         EffectChain effects;
         EffectStream effectStream;
         MicInterceptor interceptor;
@@ -36,6 +61,7 @@ namespace SkypeFx
             DisconnectFromSkype();
             interceptor = new MicInterceptor(log, effects);
             effectStream = interceptor.OutputStream;
+            tmp = new waveBuffer(interceptor.internalStream, interceptor.internalStreamLock);
         }
 
         public void DisconnectFromSkype()
@@ -79,6 +105,13 @@ namespace SkypeFx
             effectStream = new EffectStream(effects, outStream);
             CreatePlayer();
             player.Init(effectStream);
+            player.Play();
+        }
+        public void ChuPlay(IntPtr handle)
+        {
+            //effectStream = new EffectStream(effects, outStream);
+            CreatePlayer();
+            player.Init(tmp);
             player.Play();
         }
 
