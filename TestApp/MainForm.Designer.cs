@@ -33,6 +33,7 @@
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSkype = new System.Windows.Forms.ToolStripButton();
+            this.SettingsButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonOpen = new System.Windows.Forms.ToolStripButton();
             this.buttonRewind = new System.Windows.Forms.ToolStripButton();
@@ -49,7 +50,6 @@
             this.effectPanel1 = new JSNet.EffectPanel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.linkCustomerFeedbackOptions = new System.Windows.Forms.LinkLabel();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,7 +70,7 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonSkype,
-            this.toolStripButton1,
+            this.SettingsButton,
             this.toolStripSeparator2,
             this.buttonOpen,
             this.buttonRewind,
@@ -98,6 +98,16 @@
             this.toolStripButtonSkype.Size = new System.Drawing.Size(36, 36);
             this.toolStripButtonSkype.Text = "Connect to Skype";
             this.toolStripButtonSkype.Click += new System.EventHandler(this.toolStripButtonSkype_Click);
+            // 
+            // SettingsButton
+            // 
+            this.SettingsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SettingsButton.Image = global::SkypeFx.Properties.Resources._3707;
+            this.SettingsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(36, 36);
+            this.SettingsButton.Text = "SettingsButton";
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // toolStripSeparator2
             // 
@@ -248,16 +258,6 @@
             this.linkCustomerFeedbackOptions.Text = "Customer Feedback Options";
             this.linkCustomerFeedbackOptions.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCustomerFeedbackOptions_LinkClicked);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton1.Text = "SettingsButton";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click_2);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,7 +300,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.LinkLabel linkCustomerFeedbackOptions;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton SettingsButton;
     }
 }
 
