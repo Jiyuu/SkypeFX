@@ -10,7 +10,7 @@ using System.IO;
 
 namespace SkypeFx
 {
-    class MicInterceptor : IDisposable
+    class SkypeConnector : IDisposable
     {
         const int Protocol = 8;
         const int MicPort = 3754;
@@ -28,7 +28,7 @@ namespace SkypeFx
         SkypeBufferStream bufferStream;
         public EffectStream OutputStream { get; private set; }
         
-        public MicInterceptor(ILog log, EffectChain effects)
+        public SkypeConnector(ILog log, EffectChain effects)
         {
             this.log = log;
             InitSockets();

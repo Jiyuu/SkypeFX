@@ -14,7 +14,7 @@ namespace SkypeFx
 
         EffectChain effects;
         EffectStream effectStream;
-        MicInterceptor interceptor;
+        SkypeConnector interceptor;
         ILog log;
 
         public MainFormAudioGraph(ILog log)
@@ -35,7 +35,7 @@ namespace SkypeFx
         {
             Stop();
             DisconnectFromSkype();
-            interceptor = new MicInterceptor(log, effects);
+            interceptor = new SkypeConnector(log, effects);
             effectStream = interceptor.OutputStream;
         }
 
