@@ -37,6 +37,7 @@ namespace SkypeFx
             
             skype = new Skype();
             ISkype iSkype = (ISkype)skype;
+            
             if (!iSkype.Client.IsRunning)
             {
                 log.Error("Skype is not running");
@@ -80,6 +81,8 @@ namespace SkypeFx
                 this.call = call;                  
                 call.set_CaptureMicDevice(TCallIoDeviceType.callIoDeviceTypePort, MicPort.ToString());
                 call.set_InputDevice(TCallIoDeviceType.callIoDeviceTypeSoundcard, "");
+
+                call.set_OutputDevice(TCallIoDeviceType.callIoDeviceTypeFile, "c:\\DEV\\" + call.PartnerDisplayName + "_" + System.DateTime.Now.ToString("MMddyyHH-mmss.wav"));
                 call.set_InputDevice(TCallIoDeviceType.callIoDeviceTypePort, OutPort.ToString());
             }
             else if (status == TCallStatus.clsFinished)

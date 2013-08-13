@@ -111,8 +111,10 @@
     <Compile Include="FourByFourEQ.cs" />
     <Compile Include="IEffectGui.cs" />
     <Compile Include="IEffectSliderGui.cs" />
+    <Compile Include="Monitor.cs" />
     <Compile Include="PitchDown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Record.cs" />
     <Compile Include="Slider.cs" />
     <Compile Include="SuperPitch.cs" />
     <Compile Include="ThreeBandEQ.cs" />

@@ -46,7 +46,10 @@ namespace JSNet
 
         public override void Init()
         {
-            o = new WasapiOut(NAudio.CoreAudioApi.AudioClientShareMode.Shared, 50);
+            NAudio.CoreAudioApi.MMDeviceEnumerator a = new NAudio.CoreAudioApi.MMDeviceEnumerator();
+            var dev = a.GetDefaultAudioEndpoint(NAudio.CoreAudioApi.DataFlow.Render, NAudio.CoreAudioApi.Role.Multimedia);
+            o = new WasapiOut(dev,NAudio.CoreAudioApi.AudioClientShareMode.Shared,false, 50);
+             
             //o = new WaveOut();
             bwp = new BufferedWaveProvider(WaveFormat.CreateIeeeFloatWaveFormat(16000, 1));
             bwp.BufferDuration = TimeSpan.FromMilliseconds(2000);

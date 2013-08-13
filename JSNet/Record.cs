@@ -39,7 +39,8 @@ namespace JSNet
         }
         ~Recorder()
         {
-            wf.Dispose();
+            if (wf!=null)
+                wf.Dispose();
         }
         public override void Init()
         {
