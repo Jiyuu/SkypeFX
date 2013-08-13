@@ -20,6 +20,7 @@ namespace SkypeFx
         TcpServer micServer;
         TcpServer outServer;
         NetworkStream outStream;
+        object outStreamLock = new object();
         NetworkStream micStream;
         Call call;
         //int packetSize;
@@ -86,7 +87,10 @@ namespace SkypeFx
             else if (status == TCallStatus.clsFinished)
             {
                 call = null;
-                outStream.Dispose();
+                lock (outStreamLock)
+                {
+                    outStream.Dispose();
+                }
                 micStream.Dispose();
             }
         }
@@ -105,13 +109,20 @@ namespace SkypeFx
         void outServer_Disconnect(object sender, EventArgs e)
         {
             log.Info("OutServer Disconnected");
-            outStream = null;
+
+            lock (outStreamLock)
+            {
+                outStream = null;
+            }
         }
 
         void OnOutServerConnect(object sender, ConnectedEventArgs e)
         {
             log.Info("OutServer Connected");
-            outStream = e.Stream;
+            lock (outStreamLock)
+            {
+                outStream = e.Stream;
+            }
         }
 
         void OnMicServerExecute(object sender, DataReceivedEventArgs args)
@@ -126,7 +137,11 @@ namespace SkypeFx
                 // play it back
                 try
                 {
-                    outStream.Write(args.Buffer, 0, args.Buffer.Length);
+                    lock (outStreamLock)
+                    {
+                        if(outStream!=null)
+                            outStream.Write(args.Buffer, 0, args.Buffer.Length);
+                    }
                 }
                 catch (System.IO.IOException ex)
                 {
