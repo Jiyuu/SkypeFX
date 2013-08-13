@@ -266,9 +266,17 @@ namespace SkypeFx
 
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        
+
+        private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
-            audioGraph.ChuPlay(this.Handle);
+
+        }
+
+        private void toolStripButton1_Click_2(object sender, EventArgs e)
+        {
+            SettingsForm form = new SettingsForm();
+            form.ShowDialog();
         }
 
     }

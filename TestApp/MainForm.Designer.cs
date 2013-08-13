@@ -70,6 +70,7 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonSkype,
+            this.toolStripButton1,
             this.toolStripSeparator2,
             this.buttonOpen,
             this.buttonRewind,
@@ -81,8 +82,7 @@
             this.buttonRemoveEffect,
             this.buttonMoveEffectUp,
             this.buttonMoveEffectDown,
-            this.buttonSave,
-            this.toolStripButton1});
+            this.buttonSave});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(946, 39);
@@ -255,8 +255,8 @@
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton1.Text = "Play";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.toolStripButton1.Text = "SettingsButton";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click_2);
             // 
             // MainForm
             // 

@@ -20,8 +20,6 @@ namespace SkypeFx
         TcpServer micServer;
         TcpServer outServer;
         NetworkStream outStream;
-        public MemoryStream internalStream = new MemoryStream();
-        public object internalStreamLock = new object();
         NetworkStream micStream;
         Call call;
         //int packetSize;
@@ -82,7 +80,7 @@ namespace SkypeFx
                 call.set_CaptureMicDevice(TCallIoDeviceType.callIoDeviceTypePort, MicPort.ToString());
                 call.set_InputDevice(TCallIoDeviceType.callIoDeviceTypeSoundcard, "");
 
-                call.set_OutputDevice(TCallIoDeviceType.callIoDeviceTypeFile, "c:\\DEV\\" + call.PartnerDisplayName + "_" + System.DateTime.Now.ToString("MMddyyHH-mmss.wav"));
+                call.set_OutputDevice(TCallIoDeviceType.callIoDeviceTypeFile, SkypeFx.Properties.Settings.Default["LogPath"]+"\\" + Util.MakeValidFileName(call.PartnerDisplayName + "_" + System.DateTime.Now.ToString("yyMMdd-HHmmss.wav")));
                 call.set_InputDevice(TCallIoDeviceType.callIoDeviceTypePort, OutPort.ToString());
             }
             else if (status == TCallStatus.clsFinished)
@@ -126,11 +124,19 @@ namespace SkypeFx
                 // process it out through the effects
                 OutputStream.Read(args.Buffer, 0, args.Buffer.Length);
                 // play it back
-                outStream.Write(args.Buffer, 0, args.Buffer.Length);
-                lock (internalStreamLock)
+                try
                 {
-                    internalStream.Write(args.Buffer, 0, args.Buffer.Length);
+                    outStream.Write(args.Buffer, 0, args.Buffer.Length);
                 }
+                catch (System.IO.IOException ex)
+                {
+                    log.Info(ex.ToString());
+                    
+                }
+                //lock (internalStreamLock)
+                //{
+                //    internalStream.Write(args.Buffer, 0, args.Buffer.Length);
+                //}
 
             }
         }
