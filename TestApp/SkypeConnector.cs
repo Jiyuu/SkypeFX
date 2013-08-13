@@ -148,11 +148,6 @@ namespace SkypeFx
                     log.Info(ex.ToString());
                     
                 }
-                //lock (internalStreamLock)
-                //{
-                //    internalStream.Write(args.Buffer, 0, args.Buffer.Length);
-                //}
-
             }
         }
 
